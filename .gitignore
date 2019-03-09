@@ -1,0 +1,13 @@
+keys.py
+*.txt
+note
+
+bin/*
+lib/*
+lib64
+.mypy_cache/*
+pip-selfcheck.json
+__pycache__/*
+pyvenv.cfg
+share/*
+
