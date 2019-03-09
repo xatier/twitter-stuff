@@ -8,7 +8,10 @@ My collection on small things I play with Twitter API.
 ## pips
 
 ```
-pip install python-twitter
+$ python -m venv .
+$ . bin/activate
+
+$ pip install python-twitter
 ```
 
 ## keys.py
@@ -23,3 +26,20 @@ access_token_secret = ''
 # fun time
 
 - `wtf.py`: who to follow
+
+
+# Development
+
+## flake8
+
+```
+$ pip install flake8 flake8-bugbear flake8-comprehensions flake8-docstrings pep8-naming
+$ flake8 --ignore C408,D1 --show-source .
+```
+
+## yapf
+
+```
+$ pip install yapf
+$ yapf --style='{dedent_closing_brackets: true, split_before_logical_operator: false}'
+```
