@@ -1,64 +1,26 @@
 #!/usr/bin/env python3
 
 import collections
-import json
 import logging
-import time
-import typing
 
 import twitter
 
-import api_keys
+import utils
 
 LOGGER = logging.getLogger()
 LOGGER.setLevel(logging.INFO)
 LOGGER.addHandler(logging.StreamHandler())
 
 
-def dump(j) -> None:
-    if isinstance(j, twitter.models.TwitterModel):
-        j = j.AsDict()
-    LOGGER.info(json.dumps(j, sort_keys=True, indent=2))
-
-
-def verify(api: twitter.api.Api) -> None:
-    dump(api.VerifyCredentials())
-
-
-def get_rate_limit(
-    api: twitter.api.Api
-) -> twitter.ratelimit.EndpointRateLimit:
-    return api.CheckRateLimit('https://api.twitter.com/1.1/friends/list.json')
-
-
-def get_friends(
-    api: twitter.api.Api, screen_name: str
-) -> typing.List[twitter.models.User]:
-    friends = []
-
-    try:
-        friends = api.GetFriends(screen_name=screen_name)
-    except twitter.error.TwitterError as e:
-        LOGGER.warning('Twitter error %s, skipping %s', e, screen_name)
-    except Exception as e:
-        LOGGER.error('Unknown error %s, skipping %s', e, screen_name)
-
-    return friends
-
-
-def do_sleep() -> None:
-    time.sleep(90)
-
-
 def go(api: twitter.api.Api, start_user: str) -> collections.Counter:
     # sanity check
-    verify(api)
-    LOGGER.info(get_rate_limit(api))
+    utils.verify(api)
+    LOGGER.info(utils.get_rate_limit(api))
 
     # {'user screen name': 'count'}
     stats = collections.Counter()
 
-    friends = get_friends(api, start_user)
+    friends = utils.get_friends(api, start_user)
     LOGGER.info('%s has %d friends', start_user, len(friends))
 
     for u in friends:
@@ -68,10 +30,10 @@ def go(api: twitter.api.Api, start_user: str) -> collections.Counter:
         )
         stats[u.screen_name] += 1
 
-        for u2 in get_friends(api, u.screen_name):
+        for u2 in utils.get_friends(api, u.screen_name):
             stats[u2.screen_name] += 1
 
-        do_sleep()
+        utils.do_sleep()
 
     return stats
 
@@ -87,12 +49,6 @@ def report(stats: collections.Counter, filename: str) -> None:
 
 if __name__ == '__main__':
     start_user = 'daddysg1rls'
-    api = twitter.Api(
-        consumer_key=api_keys.consumer_key,
-        consumer_secret=api_keys.consumer_secret,
-        access_token_key=api_keys.access_token_key,
-        access_token_secret=api_keys.access_token_secret,
-        sleep_on_rate_limit=True
-    )
+    api = utils.login()
     s = go(api, start_user)
-    report(s, f'{start_user}.txt')
+    report(s, f'wtf_{start_user}.txt')

@@ -1,5 +1,6 @@
 import json
 import logging
+import time
 import typing
 
 import twitter
@@ -65,3 +66,7 @@ def get_followers(
         LOGGER.error('Unknown error %s, skipping %s', e, screen_name)
 
     return followers
+
+
+def do_sleep() -> None:
+    time.sleep(90)
