@@ -1,7 +1,7 @@
 import json
 import logging
 import time
-import typing
+from typing import List
 
 import twitter
 
@@ -40,7 +40,7 @@ def login() -> twitter.api.Api:
 
 def get_friends(
     api: twitter.api.Api, screen_name: str
-) -> typing.List[twitter.models.User]:
+) -> List[twitter.models.User]:
     friends = []
 
     try:
@@ -55,7 +55,7 @@ def get_friends(
 
 def get_followers(
     api: twitter.api.Api, screen_name: str
-) -> typing.List[twitter.models.User]:
+) -> List[twitter.models.User]:
     followers = []
 
     try:
