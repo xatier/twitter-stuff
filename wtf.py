@@ -8,7 +8,7 @@ import typing
 
 import twitter
 
-import keys
+import api_keys
 
 LOGGER = logging.getLogger()
 LOGGER.setLevel(logging.INFO)
@@ -88,10 +88,10 @@ def report(stats: collections.Counter, filename: str) -> None:
 if __name__ == '__main__':
     start_user = 'daddysg1rls'
     api = twitter.Api(
-        consumer_key=keys.consumer_key,
-        consumer_secret=keys.consumer_secret,
-        access_token_key=keys.access_token_key,
-        access_token_secret=keys.access_token_secret,
+        consumer_key=api_keys.consumer_key,
+        consumer_secret=api_keys.consumer_secret,
+        access_token_key=api_keys.access_token_key,
+        access_token_secret=api_keys.access_token_secret,
         sleep_on_rate_limit=True
     )
     s = go(api, start_user)

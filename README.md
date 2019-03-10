@@ -14,7 +14,7 @@ $ . bin/activate
 $ pip install python-twitter
 ```
 
-## keys.py
+## api_keys.py
 
 ```
 consumer_key = ''
