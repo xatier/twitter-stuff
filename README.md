@@ -7,6 +7,8 @@ My collection on small things I play with Twitter API.
 
 ## pips
 
+- [python-twitter](https://github.com/bear/python-twitter)
+
 ```
 $ python -m venv .
 $ . bin/activate
@@ -15,6 +17,9 @@ $ pip install python-twitter
 ```
 
 ## api_keys.py
+
+- [Create an app](https://developer.twitter.com/en/apps)
+- [Rate limits](https://developer.twitter.com/en/docs/basics/rate-limits)
 
 ```
 consumer_key = ''
@@ -26,18 +31,23 @@ access_token_secret = ''
 # fun time
 
 - `wtf.py`: who to follow
+- `wtuf.py`: who to unfollow
 
 
 # Development
+
+- PRs are very very welcome!
 
 ## flake8
 
 ```
 $ pip install flake8 flake8-bugbear flake8-comprehensions flake8-docstrings pep8-naming
-$ flake8 --ignore C408,D1 --show-source .
+$ flake8 --ignore C408,D1 --show-source *.py
 ```
 
 ## yapf
+
+- yapf can't really handle python3 type annotations though. :(
 
 ```
 $ pip install yapf
