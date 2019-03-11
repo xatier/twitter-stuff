@@ -76,4 +76,4 @@ def get_followers(
 
 
 def do_sleep() -> None:
-    time.sleep(90)
+    time.sleep(75)
