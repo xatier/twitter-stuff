@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
 
 import collections
-import logging
 
 from tqdm import tqdm
 import twitter
 
 import utils
 
-LOGGER = logging.getLogger()
-LOGGER.setLevel(logging.INFO)
-LOGGER.addHandler(logging.StreamHandler())
+LOGGER = utils.get_logger(__name__)
 
 
 def go(api: twitter.api.Api, start_user: str) -> collections.Counter:

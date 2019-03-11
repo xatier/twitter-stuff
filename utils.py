@@ -7,9 +7,16 @@ import twitter
 
 import api_keys
 
-LOGGER = logging.getLogger(__name__)
-LOGGER.setLevel(logging.INFO)
-LOGGER.addHandler(logging.StreamHandler())
+
+def get_logger(name: str) -> logging.Logger:
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s [%(levelname)s] %(message)s'
+    )
+    return logging.getLogger(name)
+
+
+LOGGER = get_logger(__name__)
 
 
 def dump(j) -> None:

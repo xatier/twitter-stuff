@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import logging
 from typing import List, Tuple
 
 from tqdm import tqdm
@@ -8,9 +7,7 @@ import twitter
 
 import utils
 
-LOGGER = logging.getLogger(__name__)
-LOGGER.setLevel(logging.INFO)
-LOGGER.addHandler(logging.StreamHandler())
+LOGGER = utils.get_logger(__name__)
 
 
 def go(api: twitter.api.Api, start_user: str) -> Tuple[
