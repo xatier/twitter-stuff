@@ -3,6 +3,7 @@
 import logging
 from typing import List, Tuple
 
+from tqdm import tqdm
 import twitter
 
 import utils
@@ -21,17 +22,17 @@ def go(api: twitter.api.Api, start_user: str) -> Tuple[
 
     friends = utils.get_friends(api, start_user)
 
-    # < 500 tweets
+    LOGGER.info('finding < 500 tweets accounts')
     less_than_500_tweets = sorted(
-        (user for user in friends if user.statuses_count < 500),
+        (user for user in tqdm(friends) if user.statuses_count < 500),
         key=lambda u: u.statuses_count,
         reverse=True
     )
 
-    # haven't tweeted since 2018
+    LOGGER.info('finding accounts havent tweeted since 2018')
     inactive_accounts = sorted(
         (
-            user for user in friends
+            user for user in tqdm(friends)
             if user.status and int(user.status.created_at.split()[-1]) < 2018
         ),
         key=lambda u: u.status.created_at_in_seconds,

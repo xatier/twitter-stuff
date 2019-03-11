@@ -3,6 +3,7 @@
 import collections
 import logging
 
+from tqdm import tqdm
 import twitter
 
 import utils
@@ -23,7 +24,7 @@ def go(api: twitter.api.Api, start_user: str) -> collections.Counter:
     friends = utils.get_friends(api, start_user)
     LOGGER.info('%s has %d friends', start_user, len(friends))
 
-    for u in friends:
+    for u in tqdm(friends):
         LOGGER.info(
             '@%s (following %d, followers %d) => %s',
             u.screen_name, u.friends_count, u.followers_count, u.name

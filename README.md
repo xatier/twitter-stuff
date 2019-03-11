@@ -13,7 +13,7 @@ My collection on small things I play with Twitter API.
 $ python -m venv .
 $ . bin/activate
 
-$ pip install python-twitter
+$ pip install python-twitter tqdm
 ```
 
 ## api_keys.py
