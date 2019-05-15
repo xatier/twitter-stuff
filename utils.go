@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"runtime"
 	"sort"
@@ -76,6 +77,7 @@ func find(xs []twitter.User, pred func(twitter.User) bool, key func(twitter.User
 	return xs1
 }
 
+// login to Twitter with the given api keys
 func login() *twitter.Client {
 	// api_keys.go has the following
 	// const consumerKey = ""
@@ -88,4 +90,24 @@ func login() *twitter.Client {
 	client := twitter.NewClient(httpClient)
 
 	return client
+}
+
+// verify an api handle
+func verify(api *twitter.Client) {
+	user, _, err := api.Accounts.VerifyCredentials(&twitter.AccountVerifyParams{})
+	if err != nil {
+		_, file, line, _ := runtime.Caller(1)
+		log.Panicf("[%s:%d] Failed to verify API handle\n", file, line)
+	}
+	prettyPrint(user)
+}
+
+// pretty print a struct with as JSON
+func prettyPrint(data interface{}) {
+	json, err := json.MarshalIndent(data, "", "  ")
+	if err != nil {
+		_, file, line, _ := runtime.Caller(1)
+		log.Printf("[%s:%d] Failed to pretty print\n", file, line)
+	}
+	fmt.Println(string(json))
 }

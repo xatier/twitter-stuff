@@ -52,6 +52,7 @@ func main() {
 	startUser := "xatierlikelee"
 	fmt.Println(startUser)
 	api := login()
+	verify(api)
 
 	lessThan500Tweets, inactiveAccounts := run(api, startUser)
 
