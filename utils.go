@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"runtime"
 	"sort"
 	"time"
@@ -17,8 +18,8 @@ func get_rate_limit(api *twitter.Client) (int, int, time.Time) {
 	})
 
 	if err != nil {
-		_, file, line, _ := runtime.Caller(1)
-		fmt.Printf("failed in %s:%d", file, line)
+		_, file, line, _ := runtime.Caller(0)
+		log.Printf("[%s:%d] Failed to get rate limits\n", file, line)
 	}
 
 	r := rateLimits.Resources.Friends["/friends/list"]
@@ -34,7 +35,8 @@ func getFriendsPaged(api *twitter.Client, screenName string, cursor int64) *twit
 	})
 
 	if err != nil {
-		panic("can't get friends, QQ")
+		_, file, line, _ := runtime.Caller(0)
+		log.Panicf("[%s:%d] Failed to get friends\n", file, line)
 	}
 
 	return friends
@@ -96,7 +98,7 @@ func login() *twitter.Client {
 func verify(api *twitter.Client) {
 	user, _, err := api.Accounts.VerifyCredentials(&twitter.AccountVerifyParams{})
 	if err != nil {
-		_, file, line, _ := runtime.Caller(1)
+		_, file, line, _ := runtime.Caller(0)
 		log.Panicf("[%s:%d] Failed to verify API handle\n", file, line)
 	}
 	prettyPrint(user)
@@ -106,7 +108,7 @@ func verify(api *twitter.Client) {
 func prettyPrint(data interface{}) {
 	json, err := json.MarshalIndent(data, "", "  ")
 	if err != nil {
-		_, file, line, _ := runtime.Caller(1)
+		_, file, line, _ := runtime.Caller(0)
 		log.Printf("[%s:%d] Failed to pretty print\n", file, line)
 	}
 	fmt.Println(string(json))

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 	"strings"
 
@@ -9,7 +10,7 @@ import (
 )
 
 func run(api *twitter.Client, startUser string) ([]twitter.User, []twitter.User) {
-	fmt.Println(get_rate_limit(api))
+	log.Println(get_rate_limit(api))
 	friends := getFriends(api, startUser)
 
 	lessThan500Tweets := find(
@@ -42,15 +43,15 @@ func run(api *twitter.Client, startUser string) ([]twitter.User, []twitter.User)
 		},
 	)
 
-	fmt.Println(get_rate_limit(api))
+	log.Println(get_rate_limit(api))
 	return lessThan500Tweets, inactiveAccounts
 }
 
 func main() {
 
-	fmt.Println("hello world")
+	log.Println("hello world")
 	startUser := "xatierlikelee"
-	fmt.Println(startUser)
+	log.Printf("with @username: %s\n", startUser)
 	api := login()
 	verify(api)
 
