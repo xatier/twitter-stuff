@@ -26,17 +26,38 @@ func get_rate_limit(api *twitter.Client) (int, int, time.Time) {
 	return r.Limit, r.Remaining, time.Unix(int64(r.Reset), 0)
 }
 
-func getFriends(api *twitter.Client, startUser string) *twitter.Friends {
-	// TODO(xatier): make pager work
+// only fetch 200 count at a time
+func getFriendsPaged(api *twitter.Client, screenName string, cursor int64) *twitter.Friends {
 	friends, _, err := api.Friends.List(&twitter.FriendListParams{
-		ScreenName: startUser,
+		ScreenName: screenName,
 		Count:      200,
+		Cursor:     cursor,
 	})
+
 	if err != nil {
 		panic("can't get friends, QQ")
 	}
 
 	return friends
+}
+
+// fetch all friends
+func getFriends(api *twitter.Client, screenName string) *twitter.Friends {
+	cursor := int64(-1)
+	result := new(twitter.Friends)
+
+	for true {
+		pagedFriends := getFriendsPaged(api, screenName, cursor)
+		cursor = pagedFriends.NextCursor
+
+		result.Users = append(result.Users, pagedFriends.Users...)
+
+		if cursor == 0 {
+			break
+		}
+	}
+
+	return result
 }
 
 func filterUser(xs []twitter.User, pred func(twitter.User) bool) []twitter.User {
