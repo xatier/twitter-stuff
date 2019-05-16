@@ -10,7 +10,7 @@ import (
 )
 
 func run(api *twitter.Client, startUser string) ([]twitter.User, []twitter.User) {
-	log.Println(get_rate_limit(api))
+	log.Println(getRateLimit(api))
 	friends := getFriends(api, startUser)
 
 	lessThan500Tweets := find(
@@ -29,21 +29,19 @@ func run(api *twitter.Client, startUser string) ([]twitter.User, []twitter.User)
 			if v.Status != nil {
 				year, _ := strconv.Atoi(strings.Split(v.Status.CreatedAt, " ")[5])
 				return year < 2018
-			} else {
-				return true
 			}
+			return true
 		},
 		func(v twitter.User) int {
 			if v.Status != nil {
 				year, _ := strconv.Atoi(strings.Split(v.Status.CreatedAt, " ")[5])
 				return year
-			} else {
-				return 0
 			}
+			return 0
 		},
 	)
 
-	log.Println(get_rate_limit(api))
+	log.Println(getRateLimit(api))
 	return lessThan500Tweets, inactiveAccounts
 }
 

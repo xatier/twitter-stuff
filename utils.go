@@ -12,7 +12,7 @@ import (
 	"github.com/dghubble/oauth1"
 )
 
-func get_rate_limit(api *twitter.Client) (int, int, time.Time) {
+func getRateLimit(api *twitter.Client) (int, int, time.Time) {
 	rateLimits, _, err := api.RateLimits.Status(&twitter.RateLimitParams{
 		Resources: []string{"friends"},
 	})
