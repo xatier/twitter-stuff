@@ -10,8 +10,8 @@ My collection on small things I play with Twitter API.
 - [python-twitter](https://github.com/bear/python-twitter)
 
 ```
-$ python -m venv .
-$ . bin/activate
+$ python -m venv venv
+$ . venv/bin/activate
 
 $ pip install python-twitter tqdm
 ```
