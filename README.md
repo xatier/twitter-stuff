@@ -53,3 +53,20 @@ $ flake8 --ignore C408,D1 --show-source *.py
 $ pip install yapf
 $ yapf --style='{dedent_closing_brackets: true, split_before_logical_operator: false}'
 ```
+
+## pre-commit
+
+```
+# install pre-commit framework into git hooks
+$ pip install pre-commit
+
+# run pre-commit on all files
+$ pre-commit run -a
+
+# pull the latest repos' versions
+$ pre-commit autoupdate
+
+# cleanup
+$ pre-commit gc
+$ pre-commit clean
+```
