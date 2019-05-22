@@ -48,7 +48,7 @@ def login() -> twitter.api.Api:
 def get_friends(
     api: twitter.api.Api, screen_name: str
 ) -> List[twitter.models.User]:
-    friends = []
+    friends: List[twitter.models.User] = []
 
     try:
         friends = api.GetFriends(screen_name=screen_name)
@@ -63,7 +63,7 @@ def get_friends(
 def get_followers(
     api: twitter.api.Api, screen_name: str
 ) -> List[twitter.models.User]:
-    followers = []
+    followers: List[twitter.models.User] = []
 
     try:
         followers = api.GetFollowers(screen_name=screen_name)

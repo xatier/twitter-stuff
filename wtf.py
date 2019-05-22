@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import collections
+from typing import Counter
 
 from tqdm import tqdm
 import twitter
@@ -16,7 +17,7 @@ def go(api: twitter.api.Api, start_user: str) -> collections.Counter:
     LOGGER.info(utils.get_rate_limit(api))
 
     # {'user screen name': 'count'}
-    stats = collections.Counter()
+    stats: Counter = collections.Counter()
 
     friends = utils.get_friends(api, start_user)
     LOGGER.info('%s has %d friends', start_user, len(friends))
