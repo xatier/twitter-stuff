@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from typing import List, Tuple
+from typing import Callable, List, Tuple
 
 from tqdm import tqdm
 import twitter
@@ -68,38 +68,43 @@ def report(
     filename: str
 ) -> None:
 
+    def print_details_from_list(
+        title: str,
+        users: List[twitter.models.User],
+        get_field: Callable
+    ) -> None:
+        f.write(f'{title}\n')
+        f.write('=' * 20 + '\n')
+        for user in users:
+            f.write(
+                f"{get_field(user)} https://twitter.com/{user.screen_name} {user.name}\n"  # noqa
+            )
+        f.write('\n\n')
+
     with open(filename, 'w') as f:
 
-        f.write('[friends] less than 500 tweets\n')
-        f.write('=' * 20 + '\n')
-        for user in following_less_than_500_tweets:
-            f.write(
-                f"{user.statuses_count:<5} https://twitter.com/{user.screen_name} {user.name}\n"  # noqa
-            )
-        f.write('\n\n')
+        print_details_from_list(
+            '[friends] less than 500 tweets',
+            following_less_than_500_tweets,
+            lambda user: f"{user.statuses_count:<5}"
+        )
 
-        f.write('[friends] inactive users since 2018\n')
-        f.write('=' * 20 + '\n')
-        for user in following_inactive_accounts:
-            f.write(
-                f"{user.status.created_at}   https://twitter.com/{user.screen_name} {user.name}\n"  # noqa
-            )
-        f.write('\n\n')
+        print_details_from_list(
+            '[friends] inactive users since 2018',
+            following_inactive_accounts,
+            lambda user: f"{user.created_at}"
+        )
 
-        f.write('[followers] less than 500 tweets\n')
-        f.write('=' * 20 + '\n')
-        for user in follower_less_than_500_tweets:
-            f.write(
-                f"{user.statuses_count:<5}   https://twitter.com/{user.screen_name} {user.name}\n"  # noqa
-            )
-        f.write('\n\n')
-
-        f.write('[followers] less than 100 followers\n')
-        f.write('=' * 20 + '\n')
-        for user in follower_less_than_100_followers:
-            f.write(
-                f"{user.followers_count:<5}   https://twitter.com/{user.screen_name} {user.name}\n"  # noqa
-            )
+        print_details_from_list(
+            '[followers] less than 500 tweets',
+            follower_less_than_500_tweets,
+            lambda user: f"{user.statuses_count:<5}"
+        )
+        print_details_from_list(
+            '[followers] less than 100 followers',
+            follower_less_than_100_followers,
+            lambda user: f"{user.followers_count:<5}"
+        )
 
 
 if __name__ == '__main__':
