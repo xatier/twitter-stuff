@@ -1,3 +1,4 @@
+import functools
 import json
 import logging
 import time
@@ -45,6 +46,7 @@ def login() -> twitter.api.Api:
     )
 
 
+@functools.lru_cache(maxsize=1024)
 def get_friends(
     api: twitter.api.Api, screen_name: str
 ) -> List[twitter.models.User]:
@@ -60,6 +62,7 @@ def get_friends(
     return friends
 
 
+@functools.lru_cache(maxsize=1024)
 def get_followers(
     api: twitter.api.Api, screen_name: str
 ) -> List[twitter.models.User]:
