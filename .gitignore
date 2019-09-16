@@ -1,5 +1,6 @@
 api_keys.py
 *.txt
+!requirements.txt
 note
 
 venv
