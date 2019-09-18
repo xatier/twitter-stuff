@@ -5,7 +5,10 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
     hooks:
+      - id: check-ast
       - id: check-yaml
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
       - id: flake8
         args:
           - '--ignore'
@@ -16,11 +19,15 @@ repos:
         additional_dependencies:
           - flake8-annotations-complexity
           - flake8-annotations-coverage
+          - flake8-assertive
           - flake8-bugbear
           - flake8-class-attributes-order
+          - flake8-class-attributes-order
+          - flake8-comprehensions
           - flake8-comprehensions
           - flake8-docstrings
           - flake8-import-order
+          - flake8-tidy-imports
           - pep8-naming
 
   - repo: https://github.com/pre-commit/pygrep-hooks
