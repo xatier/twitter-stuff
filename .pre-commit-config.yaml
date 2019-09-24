@@ -22,8 +22,6 @@ repos:
           - flake8-assertive
           - flake8-bugbear
           - flake8-class-attributes-order
-          - flake8-class-attributes-order
-          - flake8-comprehensions
           - flake8-comprehensions
           - flake8-docstrings
           - flake8-import-order
