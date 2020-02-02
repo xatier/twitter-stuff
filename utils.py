@@ -1,8 +1,9 @@
+import datetime
 import functools
 import json
 import logging
 import time
-from typing import Any, List
+from typing import Any, List, Tuple
 
 import twitter
 
@@ -32,8 +33,9 @@ def verify(api: twitter.api.Api) -> None:
 
 def get_rate_limit(
     api: twitter.api.Api
-) -> twitter.ratelimit.EndpointRateLimit:
-    return api.CheckRateLimit('https://api.twitter.com/1.1/friends/list.json')
+) -> Tuple[twitter.ratelimit.EndpointRateLimit, str]:
+    r = api.CheckRateLimit('https://api.twitter.com/1.1/friends/list.json')
+    return r, datetime.datetime.fromtimestamp(r.reset).ctime()
 
 
 def login() -> twitter.api.Api:
