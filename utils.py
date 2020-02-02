@@ -2,7 +2,7 @@ import functools
 import json
 import logging
 import time
-from typing import List
+from typing import Any, List
 
 import twitter
 
@@ -20,7 +20,7 @@ def get_logger(name: str) -> logging.Logger:
 LOGGER = get_logger(__name__)
 
 
-def dump(j) -> None:
+def dump(j: Any) -> None:
     if isinstance(j, twitter.models.TwitterModel):
         j = j.AsDict()
     LOGGER.info(json.dumps(j, sort_keys=True, indent=2))
