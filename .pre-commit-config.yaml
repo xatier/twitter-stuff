@@ -3,7 +3,7 @@ default_language_version:
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.5.0
+    rev: v3.1.0
     hooks:
       - id: check-ast
       - id: check-merge-conflict
@@ -12,6 +12,10 @@ repos:
       - id: mixed-line-ending
       - id: requirements-txt-fixer
       - id: trailing-whitespace
+
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.8.1
+    hooks:
       - id: flake8
         args:
           - '--ignore'
