@@ -1,2 +1,2 @@
 python-twitter==3.5
-tqdm==4.46.1
+tqdm==4.47.0
