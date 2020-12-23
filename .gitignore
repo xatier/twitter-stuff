@@ -1,8 +1,8 @@
-api_keys.py
-*.txt
 !requirements.txt
-note
-
-venv
+*.txt
 .mypy_cache/*
 __pycache__/*
+api_keys.go
+api_keys.py
+note
+venv/
