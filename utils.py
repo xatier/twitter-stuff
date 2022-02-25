@@ -61,7 +61,7 @@ def get_friends(
     except Exception as e:
         LOGGER.error('Unknown error %s, skipping %s', e, screen_name)
 
-    return friends
+    return friends  # noqa: R504
 
 
 @functools.lru_cache(maxsize=1024)
@@ -77,7 +77,7 @@ def get_followers(
     except Exception as e:
         LOGGER.error('Unknown error %s, skipping %s', e, screen_name)
 
-    return followers
+    return followers  # noqa: R504
 
 
 def do_sleep() -> None:

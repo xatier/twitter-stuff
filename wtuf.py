@@ -77,7 +77,7 @@ def report(
         f.write('=' * 20 + '\n')
         for user in users:
             f.write(
-                f"{get_field(user)} https://twitter.com/{user.screen_name} {user.name}\n"  # noqa
+                f"{get_field(user)} https://twitter.com/{user.screen_name} {user.name}\n"  # noqa: E501
             )
         f.write('\n\n')
 
