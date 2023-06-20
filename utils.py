@@ -21,7 +21,7 @@ def get_logger(name: str) -> logging.Logger:
 LOGGER = get_logger(__name__)
 
 
-def dump(j: Any) -> None:
+def dump(j: Any) -> None:  # noqa: ANN401
     if isinstance(j, twitter.models.TwitterModel):
         j = j.AsDict()
     LOGGER.info(json.dumps(j, sort_keys=True, indent=2))

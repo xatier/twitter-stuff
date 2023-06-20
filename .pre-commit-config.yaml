@@ -1,26 +1,30 @@
 default_language_version:
-  python: 'python3.10'
+  python: 'python3.11'
 exclude: '^\.github\/'
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
+    rev: v4.4.0
     hooks:
       - id: check-ast
       - id: check-builtin-literals
       - id: check-executables-have-shebangs
       - id: check-json
+      - id: check-shebang-scripts-are-executable
       - id: check-merge-conflict
       - id: check-symlinks
       - id: check-toml
+      - id: check-xml
       - id: check-yaml
+      - id: debug-statements
+      - id: destroyed-symlinks
       - id: end-of-file-fixer
       - id: mixed-line-ending
       - id: requirements-txt-fixer
       - id: trailing-whitespace
 
-  - repo: https://gitlab.com/pycqa/flake8
-    rev: 4.0.1
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
     hooks:
       - id: flake8
         args:
@@ -35,7 +39,7 @@ repos:
           - flake8-annotations-complexity
           - flake8-annotations-coverage
           - flake8-assertive
-          # - flake8-broken-line
+          - flake8-broken-line
           - flake8-bugbear
           - flake8-class-attributes-order
           - flake8-comprehensions
@@ -49,7 +53,7 @@ repos:
           - typing_extensions
 
   - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.9.0
+    rev: v1.10.0
     hooks:
       - id: python-check-blanket-noqa
       - id: python-check-blanket-type-ignore
@@ -57,15 +61,8 @@ repos:
       - id: python-no-log-warn
       - id: python-use-type-annotations
 
-  - repo: https://github.com/Lucas-C/pre-commit-hooks-bandit
-    rev: v1.0.5
-    hooks:
-      - id: python-bandit-vulnerability-check
-        args:
-          - '--exclude venv'
-
   - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.2.4
+    rev: v1.3.1
     hooks:
       - id: python-safety-dependencies-check
 
@@ -84,3 +81,13 @@ repos:
         language: python
         entry: yamllint
         types: [file, yaml]
+
+      - id: bandit
+        args:
+          - '--exclude venv'
+        name: bandit
+        entry: bandit
+        language: python
+        language_version: python3
+        types: [python]
+        require_serial: true
