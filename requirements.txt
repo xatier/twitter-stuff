@@ -1,2 +1,7 @@
 python-twitter==3.5
 tqdm==4.65.0
+
+# dev
+bandit==1.7.5
+mypy==1.4.1
+yamllint==1.32.0

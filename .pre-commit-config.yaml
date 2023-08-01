@@ -20,7 +20,7 @@ repos:
       - id: destroyed-symlinks
       - id: end-of-file-fixer
       - id: mixed-line-ending
-      - id: requirements-txt-fixer
+      # - id: requirements-txt-fixer
       - id: trailing-whitespace
 
   - repo: https://github.com/PyCQA/flake8
