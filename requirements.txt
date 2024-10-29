@@ -1,5 +1,5 @@
 python-twitter==3.5
-tqdm==4.66.5
+tqdm==4.66.6
 
 # dev
 bandit==1.7.10
