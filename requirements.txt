@@ -2,6 +2,6 @@ python-twitter==3.5
 tqdm==4.67.1
 
 # dev
-bandit==1.8.2
+bandit==1.8.3
 mypy==1.15.0
 yamllint==1.35.1
