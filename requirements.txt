@@ -3,5 +3,5 @@ tqdm==4.67.3
 
 # dev
 bandit==1.9.4
-mypy==1.20.1
+mypy==1.20.2
 yamllint==1.38.0
